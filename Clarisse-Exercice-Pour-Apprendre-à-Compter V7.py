@@ -21,12 +21,27 @@ def nouvelle_operation():
     if total >= NOMBRE_DE_QUESTIONS:
         fin_du_jeu()
         return
+    
+    #op = '+'  # pour simplifier
+    op = random.choice(['+', '-'])
 
+    # - Si OP = '-' tant que a < b, on inverse a et b
+    # - Si OP = '+' on laisse a et b comme ça 
     a = random.randint(1, NOMBRE_MAX)
     b = random.randint(1, NOMBRE_MAX)
-    op = '+'  # pour simplifier
 
-    current_answer = a + b
+    while (op == '-' and a <= b) :
+        a = random.randint(1, NOMBRE_MAX)
+        b = random.randint(1, NOMBRE_MAX)
+
+
+    
+
+    if op == '+':
+        current_answer = a + b
+    else:
+        current_answer = a - b
+
     current_question = f"{a} {op} {b}"
     question_label.config(text=f"{current_question} = ?")
     total += 1
@@ -135,7 +150,7 @@ def recommencer_jeu():
 # === Interface ===
 fenetre = tk.Tk()
 fenetre.title("🎉 Jeu de maths magique 🎲")
-fenetre.geometry("700x700")
+fenetre.geometry("900x700")
 fenetre.configure(bg="#ffeef8")
 
 main_frame = tk.Frame(fenetre, bg="#ffeef8")
